@@ -66,9 +66,9 @@ function buildCharts(sample) {
     var filteredData = metadata.filter(sampleName => sampleName.id == sampleId)[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var sample_values = filteredSample.sample_values;
-    var ids = filteredSample.otu_ids;
-    var labels = filteredSample.otu_labels;
+    var sample_values = filteredSamples.sample_values;
+    var ids = filteredSamples.otu_ids;
+    var labels = filteredSamples.otu_labels;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -79,7 +79,7 @@ function buildCharts(sample) {
     // 8. Create the trace for the bar chart. 
     var barData = [{
       type: 'bar',
-      x: values.slide(0,10),
+      x: sample_values.slide(0,10),
       y: ids.slice(0,10),
       text: labels.slice(0,10).reverse(),
       Orientation: 'h'
