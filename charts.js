@@ -83,12 +83,16 @@ function buildCharts(sample) {
       text: ids.slice(0,10).reverse(),
       Orientation: 'h'
     }];
-    
+
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-     
+      title: "Most Rapidly Growing Cities",
+      xaxis: {title: "City" },
+      yaxis: {title: "Population Growth, 2016-2017"}
     };
+  
+
     // 10. Use Plotly to plot the data with the layout. 
-    
+    Plotly.newPlot("bar-plot", data, layout);
   });
-}
+}      
