@@ -56,19 +56,19 @@ function buildMetadata(sample) {
 // 1. Create the buildCharts function.
 function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
-  d3.json("samples.json").then((data) => {
+  let data = d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
-    var samples = data.samples
-    var metadata = data.metadata
+    var samples = data.samples;
+    var metadata = data.metadata;
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-    var filteredSamples = metadata.filter(sampleObj => sampleObj.id == samples);
+    var filteredSamples = samples.filter(sampleObj => sampleObj.id == sampleId)[0];
     //  5. Create a variable that holds the first sample in the array.
-    var filteredSample = filteredSamples[0];
+    var filteredData = metadata.filter(sampleName => sampleName.id == sampleId)[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var values = filteredSample.sample_values;
-    var ids = filteredSample.otu_ids
-    var labels = filteredSample.otu_labels
+    var sample_values = filteredSample.sample_values;
+    var ids = filteredSample.otu_ids;
+    var labels = filteredSample.otu_labels;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
