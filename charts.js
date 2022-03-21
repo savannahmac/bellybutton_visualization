@@ -100,33 +100,33 @@ function buildCharts(sampleId) {
 }      
 
 // Create the bubble chart
-function buildCharts(sample) {
+function buildCharts(sampleId) {
   // Use d3.json to load and retrieve the samples.json file 
   d3.json("samples.json").then((data) => {
     
 
     // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
-function bubbleChart(bubbleId) {
-    let xticksBubble = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse()
-    var trace1 = {
-      x: xticksBubble,
-      y: sample_values.slice(0,10).reverse(),
-      text: otu_labels.slice(0,10).reverse()
-    }
-  };    
+  
+      let xticksBubble = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
+      
+      var trace1 = {
+        x: xticksBubble,
+        y: sample_values.slice(0,10).reverse(),
+        text: otu_labels.slice(0,10).reverse()
+      };
 
-    // 1. Create the trace for the bubble chart.
-    var bubbleData = [trace1];
+      // 1. Create the trace for the bubble chart.
+      var bubbleData = [trace1];
 
-    // 2. Create the layout for the bubble chart.
-    var bubbleLayout = {
-      title: 'OTU Data',
-      showlegend: true,
-      height: 600
+      // 2. Create the layout for the bubble chart.
+      var bubbleLayout = {
+        title: 'OTU Data',
+        showlegend: true,
+        height: 600
 
-    };
+      };
 
-    // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
+      // 3. Use Plotly to plot the data with the layout.
+      Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
   });
 }
