@@ -133,7 +133,7 @@ function buildCharts(sampleId) {
     Plotly.newPlot('bubble', bubbleData, bubbleLayout);   
 
     // Create gauge chart from https://plotly.com/javascript/gauge-charts/
-      function gauge(sampleID) {
+      function gaugeChart(sampleID) {
       var gaugeData = [
           {
               domain: { x: [0, 1], y: [0, 1] },
@@ -175,7 +175,7 @@ function buildCharts(sampleId) {
   
   barChart(sampleId)
   bubbleChart(sampleId)
-  gauge(sampleId)
+  gaugeChart(sampleId)
   })
   
 };
