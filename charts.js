@@ -70,49 +70,54 @@ function buildCharts(sampleId) {
     var sample_values = filteredSamples.sample_values;
     var ids = filteredSamples.otu_ids;
     var labels = filteredSamples.otu_labels;
+    var wfreq = parseInt(filteredData.wfreq)
 
+    function updatePlotly(newdata) {
+      Plotly.restyle("pie", "values", [newdata]);
+    }
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
 
-    var yticks = ids.slice(0,10).map(otuID => 'OTU $(otuID)').reverse();
+    function barChart(dataID) {
+      var yticks = ids.slice(0,10).map(otuID => 'OTU $(otuID)').reverse();
 
     // 8. Create the trace for the bar chart. 
-    var barData = [{
-      type: 'bar',
-      x: sample_values.slice(0,10).reverse(),
-      y: yticks,
-      text: labels.slice(0,10).reverse(),
-      Orientation: 'h'
-    }];
+      var barData = [{
+        type: 'bar',
+        x: sample_values.slice(0,10).reverse(),
+        y: yticks,
+        text: labels.slice(0,10).reverse(),
+        Orientation: 'h'
+      }];
 
     // 9. Create the layout for the bar chart. 
-    var barLayout = {
-      title: "Most Rapidly Growing Cities",
-      xaxis: {title: "City" },
-      yaxis: {title: "Population Growth, 2016-2017"}
-    };
+      var barLayout = {
+        title: "Most Rapidly Growing Cities",
+        xaxis: {title: "City" },
+        yaxis: {title: "Population Growth, 2016-2017"}
+      };
   
+    };
 
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar-plot", barData, barLayout);
-  });
-}      
-
-// Create the bubble chart
-function buildCharts(sampleId) {
-  // Use d3.json to load and retrieve the samples.json file 
-  d3.json("samples.json").then((data) => {
     
 
+    // Create the bubble chart
+
     // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
-  
-      let xticksBubble = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
+    function bubbleChart(dataID) {
+      var xticksBubble = ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
       
       var trace1 = {
         x: xticksBubble,
         y: sample_values.slice(0,10).reverse(),
-        text: otu_labels.slice(0,10).reverse()
+        text: labels.slice(0,10).reverse()
+        mode: 'markers'
+        marker: {
+          color: ids.slice(0,10).reverse()
+        }
       };
 
       // 1. Create the trace for the bubble chart.
@@ -121,12 +126,13 @@ function buildCharts(sampleId) {
       // 2. Create the layout for the bubble chart.
       var bubbleLayout = {
         title: 'OTU Data',
-        showlegend: true,
+        showlegend: false,
         height: 600
 
       };
+    };    
 
-      // 3. Use Plotly to plot the data with the layout.
-      Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
-  });
-}
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
+
+};
