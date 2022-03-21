@@ -54,7 +54,7 @@ function buildMetadata(sample) {
 }
 
 // 1. Create the buildCharts function.
-function buildCharts(sample) {
+function buildCharts(sampleId) {
   // 2. Use d3.json to load and retrieve the samples.json file 
   let data = d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
@@ -62,9 +62,9 @@ function buildCharts(sample) {
     var metadata = data.metadata;
 
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-    var filteredSamples = samples.filter(sampleName => sampleName.id == sampleId)[0];
+    var filteredSamples = samples.filter(sampleNames => sampleNames.id == sampleId)[0];
     //  5. Create a variable that holds the first sample in the array.
-    var filteredData = metadata.filter(sampleName => sampleName.id == sampleId)[0];
+    var filteredData = metadata.filter(sampleNames => sampleNames.id == sampleId)[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var sample_values = filteredSamples.sample_values;
@@ -98,3 +98,35 @@ function buildCharts(sample) {
     Plotly.newPlot("bar-plot", barData, barLayout);
   });
 }      
+
+// Create the bubble chart
+function buildCharts(sample) {
+  // Use d3.json to load and retrieve the samples.json file 
+  d3.json("samples.json").then((data) => {
+    
+
+    // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
+function bubbleChart(bubbleId) {
+    let xticksBubble = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse()
+    var trace1 = {
+      x: xticksBubble,
+      y: sample_values.slice(0,10).reverse(),
+      text: otu_labels.slice(0,10).reverse()
+    }
+  };    
+
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [trace1];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: 'OTU Data',
+      showlegend: true,
+      height: 600
+
+    };
+
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout); 
+  });
+}
