@@ -108,7 +108,7 @@ function buildCharts(sampleId) {
     // Create the bubble chart
 
     // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
-    function bubbleChart(dataID) {
+    function bubbleChart(sampleID) {
       var xticksBubble = ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
       
       var trace1 = {
@@ -133,7 +133,7 @@ function buildCharts(sampleId) {
     Plotly.newPlot('bubble', bubbleData, bubbleLayout);   
 
     // Create gauge chart from https://plotly.com/javascript/gauge-charts/
-      function gauge(dataID) {
+      function gauge(sampleID) {
       var gaugeData = [
           {
               domain: { x: [0, 1], y: [0, 1] },
@@ -171,8 +171,9 @@ function buildCharts(sampleId) {
 
       
       Plotly.newPlot('gauge', gaugeData, gaugeLayout);
-  }
-  horizontalChart(sampleId)
+  };
+  
+  barChart(sampleId)
   bubbleChart(sampleId)
   gauge(sampleId)
   })
